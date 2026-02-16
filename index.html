@@ -1,0 +1,566 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Fractional Real Estate Investing — Mock</title>
+  <meta name="description" content="Mock landing page for a fractional real estate investing platform." />
+  <style>
+    :root{
+      --bg: #0b0f17;
+      --panel: #111827;
+      --panel2:#0f172a;
+      --text:#e5e7eb;
+      --muted:#9ca3af;
+      --brand:#60a5fa;
+      --brand2:#22c55e;
+      --danger:#ef4444;
+      --border: rgba(255,255,255,.10);
+      --shadow: 0 18px 50px rgba(0,0,0,.45);
+      --radius: 18px;
+      --radius2: 26px;
+      --max: 1120px;
+      --pad: 20px;
+      --font: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
+    }
+    *{ box-sizing: border-box; }
+    html,body{ height:100%; }
+    body{
+      margin:0;
+      font-family: var(--font);
+      color: var(--text);
+      background:
+        radial-gradient(900px 600px at 10% 0%, rgba(96,165,250,.18), transparent 55%),
+        radial-gradient(900px 600px at 90% 10%, rgba(34,197,94,.14), transparent 55%),
+        radial-gradient(800px 500px at 50% 110%, rgba(168,85,247,.10), transparent 55%),
+        var(--bg);
+      line-height: 1.5;
+    }
+
+    a{ color: inherit; text-decoration: none; }
+    .container{ max-width: var(--max); margin:0 auto; padding: 0 var(--pad); }
+    .pill{
+      display:inline-flex; align-items:center; gap:10px;
+      border:1px solid var(--border);
+      background: rgba(255,255,255,.04);
+      padding: 10px 14px;
+      border-radius: 999px;
+      font-size: 14px;
+      color: var(--muted);
+      backdrop-filter: blur(10px);
+    }
+    .dot{
+      width:10px; height:10px; border-radius:50%;
+      background: linear-gradient(135deg, var(--brand), var(--brand2));
+      box-shadow: 0 0 0 6px rgba(96,165,250,.10);
+    }
+
+    /* Header */
+    header{
+      position: sticky; top:0; z-index: 10;
+      background: rgba(11,15,23,.65);
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid rgba(255,255,255,.06);
+    }
+    .nav{
+      display:flex; align-items:center; justify-content: space-between;
+      padding: 14px 0;
+    }
+    .brand{
+      display:flex; align-items:center; gap:12px;
+      font-weight: 800; letter-spacing: .2px;
+    }
+    .logo{
+      width: 34px; height: 34px; border-radius: 12px;
+      background: linear-gradient(135deg, rgba(96,165,250,1), rgba(34,197,94,1));
+      box-shadow: 0 10px 30px rgba(96,165,250,.18);
+      border: 1px solid rgba(255,255,255,.15);
+    }
+    .navlinks{
+      display:flex; align-items:center; gap:18px;
+      color: var(--muted);
+      font-size: 14px;
+    }
+    .navlinks a{ padding: 10px 10px; border-radius: 12px; }
+    .navlinks a:hover{ background: rgba(255,255,255,.05); color: var(--text); }
+
+    .actions{ display:flex; align-items:center; gap:12px; }
+    .btn{
+      display:inline-flex; align-items:center; justify-content:center;
+      padding: 11px 14px;
+      border-radius: 14px;
+      border: 1px solid rgba(255,255,255,.12);
+      background: rgba(255,255,255,.05);
+      color: var(--text);
+      font-weight: 650;
+      font-size: 14px;
+      cursor: pointer;
+      transition: transform .08s ease, background .2s ease, border-color .2s ease;
+    }
+    .btn:hover{ background: rgba(255,255,255,.08); border-color: rgba(255,255,255,.18); }
+    .btn:active{ transform: translateY(1px); }
+    .btn.primary{
+      background: linear-gradient(135deg, rgba(96,165,250,1), rgba(34,197,94,1));
+      border-color: rgba(255,255,255,.18);
+      color: #071018;
+      box-shadow: 0 16px 40px rgba(34,197,94,.12);
+    }
+
+    /* Hero */
+    .hero{
+      padding: 54px 0 24px;
+    }
+    .heroGrid{
+      display:grid;
+      grid-template-columns: 1.1fr .9fr;
+      gap: 22px;
+      align-items: stretch;
+    }
+    .h1{
+      font-size: clamp(34px, 5vw, 56px);
+      line-height: 1.05;
+      margin: 16px 0 12px;
+      letter-spacing: -0.8px;
+    }
+    .sub{
+      font-size: 18px;
+      color: var(--muted);
+      margin: 0 0 18px;
+      max-width: 54ch;
+    }
+    .heroCard{
+      border:1px solid var(--border);
+      background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.03));
+      border-radius: var(--radius2);
+      padding: 20px;
+      box-shadow: var(--shadow);
+      position: relative;
+      overflow:hidden;
+    }
+    .heroCard::before{
+      content:"";
+      position:absolute; inset:-1px;
+      background:
+        radial-gradient(600px 250px at 10% 0%, rgba(96,165,250,.25), transparent 55%),
+        radial-gradient(600px 250px at 90% 0%, rgba(34,197,94,.18), transparent 60%);
+      opacity: .55;
+      pointer-events:none;
+    }
+    .heroCard > *{ position:relative; }
+
+    .kpis{
+      display:grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      margin-top: 16px;
+    }
+    .kpi{
+      border:1px solid rgba(255,255,255,.10);
+      background: rgba(255,255,255,.04);
+      border-radius: 16px;
+      padding: 14px;
+    }
+    .kpi .v{ font-size: 18px; font-weight: 800; }
+    .kpi .l{ font-size: 12px; color: var(--muted); margin-top: 4px; }
+
+    /* Form */
+    form{ margin-top: 16px; }
+    .fieldRow{
+      display:flex; gap:10px; align-items: stretch; flex-wrap: wrap;
+    }
+    input, select{
+      width: 100%;
+      padding: 12px 12px;
+      border-radius: 14px;
+      border: 1px solid rgba(255,255,255,.12);
+      background: rgba(8,12,18,.6);
+      color: var(--text);
+      outline:none;
+    }
+    input::placeholder{ color: rgba(156,163,175,.7); }
+    .grow{ flex: 1 1 220px; }
+    .small{ flex: 0 0 180px; }
+    .helper{
+      font-size: 12px;
+      color: rgba(156,163,175,.9);
+      margin-top: 10px;
+    }
+
+    /* Sections */
+    section{ padding: 34px 0; }
+    .sectionTitle{
+      display:flex; align-items: baseline; justify-content: space-between;
+      gap: 18px;
+      margin-bottom: 14px;
+    }
+    h2{
+      margin:0;
+      font-size: 22px;
+      letter-spacing: -.2px;
+    }
+    .sectionTitle p{
+      margin:0;
+      color: var(--muted);
+      max-width: 62ch;
+      font-size: 14px;
+    }
+
+    .grid3{
+      display:grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+    }
+    .grid2{
+      display:grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 14px;
+    }
+    .card{
+      border:1px solid var(--border);
+      background: rgba(255,255,255,.03);
+      border-radius: var(--radius);
+      padding: 16px;
+    }
+    .card strong{ display:block; font-size: 16px; margin-bottom: 6px; }
+    .card p{ margin:0; color: var(--muted); font-size: 14px; }
+    .badge{
+      display:inline-flex; align-items:center; gap:8px;
+      border:1px solid rgba(255,255,255,.10);
+      background: rgba(255,255,255,.04);
+      padding: 8px 10px;
+      border-radius: 999px;
+      font-size: 12px;
+      color: rgba(229,231,235,.9);
+      margin-bottom: 10px;
+    }
+
+    .opportunity{
+      display:flex; flex-direction: column; gap: 12px;
+    }
+    .opTop{
+      display:flex; align-items:flex-start; justify-content: space-between; gap: 10px;
+    }
+    .opTop .name{ font-weight: 800; }
+    .tag{
+      font-size: 12px;
+      padding: 6px 10px;
+      border-radius: 999px;
+      border:1px solid rgba(255,255,255,.10);
+      background: rgba(255,255,255,.04);
+      color: var(--muted);
+      white-space: nowrap;
+    }
+    .meta{
+      display:grid; grid-template-columns: repeat(3, 1fr); gap: 10px;
+    }
+    .meta .m{
+      border:1px solid rgba(255,255,255,.08);
+      background: rgba(255,255,255,.02);
+      border-radius: 14px;
+      padding: 10px;
+    }
+    .meta .m .k{ font-size: 12px; color: var(--muted); }
+    .meta .m .v{ font-size: 14px; font-weight: 750; margin-top: 2px; }
+
+    details{
+      border:1px solid rgba(255,255,255,.10);
+      background: rgba(255,255,255,.03);
+      border-radius: 16px;
+      padding: 12px 14px;
+    }
+    summary{
+      cursor:pointer;
+      font-weight: 700;
+      list-style: none;
+    }
+    summary::-webkit-details-marker{ display:none; }
+    details p{ margin:10px 0 0; color: var(--muted); font-size: 14px; }
+
+    footer{
+      border-top: 1px solid rgba(255,255,255,.08);
+      padding: 26px 0 34px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+    .foot{
+      display:flex; align-items:flex-start; justify-content: space-between;
+      gap: 16px; flex-wrap: wrap;
+    }
+    .fineprint{
+      max-width: 88ch;
+      color: rgba(156,163,175,.85);
+    }
+
+    /* Responsive */
+    @media (max-width: 920px){
+      .heroGrid{ grid-template-columns: 1fr; }
+      .grid3{ grid-template-columns: 1fr; }
+      .grid2{ grid-template-columns: 1fr; }
+      .kpis{ grid-template-columns: 1fr; }
+      .navlinks{ display:none; }
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <div class="container">
+      <div class="nav">
+        <a class="brand" href="#top" aria-label="Home">
+          <span class="logo" aria-hidden="true"></span>
+          <span>Lofted Homes <span style="opacity:.6;font-weight:700;">(Mock)</span></span>
+        </a>
+
+        <nav class="navlinks" aria-label="Primary">
+          <a href="#how">How it works</a>
+          <a href="#strategies">Strategies</a>
+          <a href="#deals">Opportunities</a>
+          <a href="#faq">FAQ</a>
+        </nav>
+
+        <div class="actions">
+          <a class="btn" href="#deals">View deals</a>
+          <a class="btn primary" href="#waitlist">Join waitlist</a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main id="top">
+    <div class="container">
+      <section class="hero">
+        <div class="heroGrid">
+          <div>
+            <div class="pill"><span class="dot"></span> Fractional real estate investing — starting at 1%</div>
+            <h1 class="h1">Buy a piece of a home. <br/>Build wealth with professionals.</h1>
+            <p class="sub">
+              Invest in single-family rentals and fix-and-flip projects through property-specific LLCs.
+              Choose your strategy, review underwriting, and track performance — all in one dashboard.
+            </p>
+
+            <div class="fieldRow" style="margin-top:16px;">
+              <a class="btn primary" href="#waitlist">Get early access</a>
+              <a class="btn" href="#how">See how it works</a>
+            </div>
+
+            <div class="kpis" aria-label="Key stats (mock)">
+              <div class="kpi">
+                <div class="v">$100</div>
+                <div class="l">Min. commitment (mock)</div>
+              </div>
+              <div class="kpi">
+                <div class="v">1–3 yrs</div>
+                <div class="l">Flip project horizon</div>
+              </div>
+              <div class="kpi">
+                <div class="v">Quarterly</div>
+                <div class="l">Reporting cadence</div>
+              </div>
+            </div>
+          </div>
+
+          <aside class="heroCard" id="waitlist" aria-label="Waitlist form (mock)">
+            <div class="badge">🚧 Mock UI — no data is saved</div>
+            <strong style="font-size:18px;">Join the early access list</strong>
+            <p style="color:var(--muted); margin:6px 0 0;">
+              Get notified when the first opportunities go live. Pick what you’re most interested in.
+            </p>
+
+            <form onsubmit="event.preventDefault(); alert('Mock form submitted! (No data saved)');">
+              <div class="fieldRow" style="margin-top:12px;">
+                <input class="grow" type="text" name="name" placeholder="Full name" required />
+              </div>
+              <div class="fieldRow" style="margin-top:10px;">
+                <input class="grow" type="email" name="email" placeholder="Email address" required />
+              </div>
+              <div class="fieldRow" style="margin-top:10px;">
+                <select class="grow" name="interest" aria-label="Interest">
+                  <option value="buy_hold">Buy & Hold</option>
+                  <option value="fix_flip">Fix & Flip</option>
+                  <option value="rentals">Rentals</option>
+                  <option value="all" selected>All strategies</option>
+                </select>
+                <button class="btn primary small" type="submit">Join</button>
+              </div>
+              <div class="helper">
+                By joining, you agree to receive product updates. This is not an offer to sell securities.
+              </div>
+            </form>
+          </aside>
+        </div>
+      </section>
+
+      <section id="how">
+        <div class="sectionTitle">
+          <h2>How it works</h2>
+          <p>Simple flow for a launchable MVP: deal sourcing → underwriting → property LLC → investor dashboard.</p>
+        </div>
+
+        <div class="grid3">
+          <div class="card">
+            <div class="badge">1</div>
+            <strong>Browse vetted opportunities</strong>
+            <p>Each property has a summary, underwriting assumptions, renovation scope (if any), and risk notes.</p>
+          </div>
+          <div class="card">
+            <div class="badge">2</div>
+            <strong>Commit from as little as 1%</strong>
+            <p>Invest through a property-specific LLC with clearly defined fees, distributions, and governance.</p>
+          </div>
+          <div class="card">
+            <div class="badge">3</div>
+            <strong>Track performance</strong>
+            <p>See updates, photos, budgets, rent rolls, and distributions — with quarterly reporting.</p>
+          </div>
+        </div>
+      </section>
+
+      <section id="strategies">
+        <div class="sectionTitle">
+          <h2>Investment strategies</h2>
+          <p>Offer multiple paths so investors can match risk/return to their goals.</p>
+        </div>
+
+        <div class="grid3">
+          <div class="card">
+            <div class="badge">🏠 Buy & Hold</div>
+            <strong>Long-term appreciation + cash flow</strong>
+            <p>Target stabilized rentals with conservative leverage and professional property management.</p>
+          </div>
+
+          <div class="card">
+            <div class="badge">🛠️ Fix & Flip</div>
+            <strong>Value-add renovations with verified contractors</strong>
+            <p>Clear scope, draws, and milestone reporting — designed for faster exits and higher volatility.</p>
+          </div>
+
+          <div class="card">
+            <div class="badge">🏢 Rentals</div>
+            <strong>Income-first portfolio building</strong>
+            <p>Focus on rent-ready units and operational excellence: leasing, maintenance, and tenant retention.</p>
+          </div>
+        </div>
+      </section>
+
+      <section id="deals">
+        <div class="sectionTitle">
+          <h2>Featured opportunities</h2>
+          <p>Mock cards you can later wire up to a CMS, Airtable, or a simple database.</p>
+        </div>
+
+        <div class="grid3">
+          <div class="card opportunity">
+            <div class="opTop">
+              <div>
+                <div class="name">Ballard SFR (Seattle, WA)</div>
+                <div style="color:var(--muted);font-size:13px;">3 bd · 2 ba · 1,540 sf</div>
+              </div>
+              <div class="tag">Buy & Hold</div>
+            </div>
+            <div class="meta">
+              <div class="m"><div class="k">Target IRR</div><div class="v">9–12% (mock)</div></div>
+              <div class="m"><div class="k">Min. buy-in</div><div class="v">$250</div></div>
+              <div class="m"><div class="k">Status</div><div class="v">Under review</div></div>
+            </div>
+            <a class="btn" href="#waitlist">Request access</a>
+          </div>
+
+          <div class="card opportunity">
+            <div class="opTop">
+              <div>
+                <div class="name">Tacoma Flip (Tacoma, WA)</div>
+                <div style="color:var(--muted);font-size:13px;">4 bd · 2 ba · 1,820 sf</div>
+              </div>
+              <div class="tag">Fix & Flip</div>
+            </div>
+            <div class="meta">
+              <div class="m"><div class="k">Target IRR</div><div class="v">16–22% (mock)</div></div>
+              <div class="m"><div class="k">Timeline</div><div class="v">10–14 mo</div></div>
+              <div class="m"><div class="k">Status</div><div class="v">Soft-circled</div></div>
+            </div>
+            <a class="btn" href="#waitlist">Request access</a>
+          </div>
+
+          <div class="card opportunity">
+            <div class="opTop">
+              <div>
+                <div class="name">Everett Rental (Everett, WA)</div>
+                <div style="color:var(--muted);font-size:13px;">Duplex · 2×(2 bd/1 ba)</div>
+              </div>
+              <div class="tag">Rentals</div>
+            </div>
+            <div class="meta">
+              <div class="m"><div class="k">Cash-on-cash</div><div class="v">6–8% (mock)</div></div>
+              <div class="m"><div class="k">Occupancy</div><div class="v">95% (mock)</div></div>
+              <div class="m"><div class="k">Status</div><div class="v">Coming soon</div></div>
+            </div>
+            <a class="btn" href="#waitlist">Request access</a>
+          </div>
+        </div>
+      </section>
+
+      <section id="faq">
+        <div class="sectionTitle">
+          <h2>FAQ</h2>
+          <p>Use this to pre-handle objections: trust, liquidity, fees, risks, and legal positioning.</p>
+        </div>
+
+        <div class="grid2">
+          <details>
+            <summary>Is this an offer to sell securities?</summary>
+            <p>No — this mock site is for design only. A real platform would need proper legal structure, disclosures, and compliance.</p>
+          </details>
+
+          <details>
+            <summary>How do property LLCs work?</summary>
+            <p>Each property sits in its own LLC, and investors buy membership interests. Operating agreements define fees, voting, and distributions.</p>
+          </details>
+
+          <details>
+            <summary>How do you verify contractors and property managers?</summary>
+            <p>Mock answer: licensing/insurance checks, reference calls, background checks, and performance scorecards over time.</p>
+          </details>
+
+          <details>
+            <summary>When do investors get paid?</summary>
+            <p>Mock answer: flips pay at exit; rentals distribute net cash flow periodically (e.g., quarterly) after reserves and expenses.</p>
+          </details>
+        </div>
+      </section>
+
+      <section>
+        <div class="heroCard" style="padding:22px;">
+          <div class="sectionTitle" style="margin-bottom:10px;">
+            <h2>Ready to see the MVP version?</h2>
+            <p>Next step is wiring the “Featured opportunities” to a data source + adding a basic investor dashboard page.</p>
+          </div>
+          <div class="fieldRow">
+            <a class="btn primary" href="#waitlist">Join early access</a>
+            <a class="btn" href="#deals">View opportunities</a>
+          </div>
+        </div>
+      </section>
+
+      <footer>
+        <div class="foot container">
+          <div>
+            <div style="display:flex;align-items:center;gap:10px;">
+              <span class="logo" aria-hidden="true" style="width:26px;height:26px;border-radius:10px;"></span>
+              <strong style="color:var(--text);">Lofted Homes (Mock)</strong>
+            </div>
+            <div style="margin-top:8px;">© <span id="year"></span> Mock website. All numbers are placeholders.</div>
+          </div>
+
+          <div class="fineprint">
+            <div><strong style="color:var(--text);">Disclaimer:</strong> This page is a design mockup and does not constitute an offer to sell securities or solicit investments. Any real-world implementation requires legal, regulatory, and compliance review.</div>
+          </div>
+        </div>
+      </footer>
+    </div>
+  </main>
+
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
